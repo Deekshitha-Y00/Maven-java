@@ -1,0 +1,43 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git ''https://github.com/Deekshitha-Y00/Maven-java.git
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo 'Building the project...'
+                sh 'mvn clean package'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Running tests...'
+                sh 'mvn test'
+            }
+        }
+
+        stage('Docker Build & Run') {
+            steps {
+                echo 'Building Docker image...'
+                sh 'docker build -t myapp .'
+                sh 'docker run -d -p 8080:8080 myapp'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo ' Pipeline completed successfully!'
+        }
+        failure {
+            echo ' Pipeline failed. Check logs.'
+        }
+    }
+}
+
