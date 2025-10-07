@@ -6,24 +6,24 @@ pipeline {
     stages {
         stage('git repo & clean') {
             steps {
-                //bat "rmdir  /s /q mavenjava"
+                //bat "rmdir  /s /q Maven-java"
                 bat "git clone https://github.com/Deekshitha-Y00/Maven-java.git"
-                bat "mvn clean -f mavenjava"
+                bat "mvn clean -f Maven-java"
             }
         }
         stage('install') {
             steps {
-                bat "mvn install -f mavenjava" Maven-java
+                bat "mvn install -f Maven-java/pom.xml"
             }
         }
         stage('test') {
             steps {
-                bat "mvn test -f mavenjava"
+                bat "mvn test -f Maven-java"
             }
         }
         stage('package') {
             steps {
-                bat "mvn package -f mavenjava"
+                bat "mvn package -f Maven-java"
             }
         }
     }
