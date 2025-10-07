@@ -7,13 +7,13 @@ pipeline {
         stage('git repo & clean') {
             steps {
                 //bat "rmdir  /s /q mavenjava"
-                bat "git clone provide your github link"
+                bat "git clone https://github.com/Deekshitha-Y00/Maven-java.git"
                 bat "mvn clean -f mavenjava"
             }
         }
         stage('install') {
             steps {
-                bat "mvn install -f mavenjava" #project name#
+                bat "mvn install -f mavenjava" Maven-java
             }
         }
         stage('test') {
